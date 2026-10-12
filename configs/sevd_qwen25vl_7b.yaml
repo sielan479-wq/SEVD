@@ -1,0 +1,49 @@
+# Cross-backbone POPE/MME configuration; the public table reports POPE only.
+project_root: ${SEVD_ROOT}
+output_root: ${SEVD_ROOT}/outputs
+model_family: qwen25vl
+model_path: ${QWEN_MODEL_PATH}
+
+pope:
+  image_root: ${COCO_IMAGE_ROOT}
+
+chair:
+  synonym_file: ${SEVD_ROOT}/assets/chair/synonyms.txt
+
+mme:
+  benchmark_root: ${MME_ROOT}
+  image_root: ${MME_ROOT}
+
+# Legacy runtime key retained for exact provenance compatibility.
+sccd_v1:
+  enabled: true
+  display_name: SEVD
+  source_method_slug: object_main_candidate_textonly_v1
+  requires_intervention: true
+  seed: 55
+  do_sample: false
+  temperature: 0
+  top_k: 50
+  object_logit_window: 3.0
+  max_claims_per_image: 8
+  blur_radius: 15.0
+  prior_mode: text_only_exact
+  lambda_prior: 0.5
+  lambda_blur: 0.0
+  suppress_threshold: -1.0
+  promote_threshold: 0.45
+  margin_floor: -0.55
+  suppression_strength: 10000.0
+  promotion_strength: 0.5
+  probability_mode: object_existence_yes_no_next_token_margin
+  verifier_prompt_template: qwen_chat_template_yes_no_object_existence
+  verbalizer_aggregation: logsumexp_next_token
+  attribute_enabled: false
+  count_enabled: false
+  relation_enabled: false
+
+greedy:
+  display_name: Greedy
+  source_method: standard_qwen_generate
+  requires_intervention: false
+  seed: 55

@@ -1,0 +1,19 @@
+# Versions from the environment used for the LLaVA-1.5-7B experiments.
+torch==2.1.2
+torchvision==0.16.2
+transformers==4.37.2
+tokenizers==0.15.1
+accelerate==0.21.0
+numpy==1.26.4
+Pillow==10.4.0
+scikit-learn==1.2.2
+nltk==3.9.4
+tqdm==4.67.3
+spacy==3.7.5
+sentencepiece==0.1.99
+einops==0.6.1
+einops-exts==0.0.4
+timm==0.6.13
+shortuuid==1.0.13
+protobuf==7.34.1
+safetensors==0.7.0

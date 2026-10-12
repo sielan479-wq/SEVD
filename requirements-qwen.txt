@@ -1,0 +1,16 @@
+# Versions from the environment used for the Qwen2.5-VL-7B-Instruct validation.
+torch==2.1.2
+torchvision==0.16.2
+transformers==4.51.3
+tokenizers==0.21.4
+accelerate==1.14.0
+numpy==1.26.4
+Pillow==10.4.0
+scikit-learn==1.2.2
+nltk==3.9.4
+tqdm==4.67.3
+sentencepiece==0.1.99
+qwen-vl-utils==0.0.14
+einops==0.6.1
+protobuf==7.34.1
+safetensors==0.7.0

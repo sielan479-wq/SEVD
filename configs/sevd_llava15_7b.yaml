@@ -1,0 +1,58 @@
+# Final SEVD tuned-v3 configuration used for the public result tables.
+project_root: ${SEVD_ROOT}
+output_root: ${SEVD_ROOT}/outputs
+model_path: ${LLAVA_MODEL_PATH}
+llava_code_path: ${LLAVA_CODE_PATH}
+
+pope:
+  image_root: ${COCO_IMAGE_ROOT}
+  splits: [random, popular, adversarial]
+
+chair:
+  image_root: ${COCO_IMAGE_ROOT}
+  annotation_root: ${COCO_ANNOTATION_ROOT}
+  synonym_file: ${SEVD_ROOT}/assets/chair/synonyms.txt
+  scorer_cache: ${SEVD_ROOT}/outputs/cache/chair_cache.pkl
+  max_new_tokens: 64
+
+mme:
+  benchmark_root: ${MME_ROOT}
+  image_root: ${MME_ROOT}
+
+amber:
+  source_root: ${AMBER_ROOT}
+  image_root: ${AMBER_ROOT}/image
+
+# Legacy runtime key retained so frozen run IDs and traces remain comparable.
+sccd_v1:
+  enabled: true
+  display_name: SEVD
+  source_method_slug: object_main_candidate_textonly_v1
+  requires_intervention: true
+  seed: 55
+  do_sample: false
+  temperature: 0
+  top_k: 50
+  object_logit_window: 3.0
+  max_claims_per_image: 8
+  blur_radius: 15.0
+  prior_mode: text_only_exact
+  lambda_prior: 0.5
+  lambda_blur: 0.0
+  suppress_threshold: -1.0
+  promote_threshold: 0.45
+  margin_floor: -0.55
+  suppression_strength: 10000.0
+  promotion_strength: 0.5
+  probability_mode: object_existence_yes_no_next_token_margin
+  verifier_prompt_template: unified_yes_no_object_existence
+  verbalizer_aggregation: logsumexp_next_token
+  attribute_enabled: false
+  count_enabled: false
+  relation_enabled: false
+
+greedy:
+  display_name: Greedy
+  source_method: standard_llava_generate
+  requires_intervention: false
+  seed: 55

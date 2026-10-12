@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="900" viewBox="0 0 1800 900" role="img" aria-labelledby="title desc">
+  <title id="title">Motivation for Semantic Claim Contrastive Decoding</title>
+  <desc id="desc">An illustrative comparison showing why token confidence can confuse contextual plausibility with visual support, and how SCCD verifies an object-existence claim with real, blurred, and text-only evidence before selectively suppressing, keeping, or promoting it.</desc>
+  <defs>
+    <style>
+      .h { font: 700 28px 'DejaVu Sans', Arial, sans-serif; fill: #17324D; }
+      .s { font: 400 18px 'DejaVu Sans', Arial, sans-serif; fill: #31475B; }
+      .sb { font: 700 18px 'DejaVu Sans', Arial, sans-serif; fill: #17324D; }
+      .center { text-anchor: middle; dominant-baseline: middle; }
+      .muted { fill: #66788A; }
+      .white { fill: #FFFFFF; }
+      .blue-stroke { stroke: #2C5F8A; }
+      .teal-stroke { stroke: #178F7B; }
+      .orange-stroke { stroke: #D97706; }
+      .line { fill: none; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+    </style>
+    <marker id="arrowBlue" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L10,5 L0,10 z" fill="#2C5F8A"/>
+    </marker>
+    <marker id="arrowTeal" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L10,5 L0,10 z" fill="#178F7B"/>
+    </marker>
+    <marker id="arrowOrange" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L10,5 L0,10 z" fill="#D97706"/>
+    </marker>
+    <clipPath id="sceneClip"><rect x="64" y="210" width="232" height="170" rx="14"/></clipPath>
+  </defs>
+
+  <rect width="1800" height="900" fill="#FFFFFF"/>
+  <text x="900" y="39" class="h center">Why Semantic Claim Contrastive Decoding?</text>
+  <text x="900" y="73" class="s center muted">Token plausibility and visual support are not the same signal</text>
+
+  <!-- Region 1: failure mode -->
+  <rect x="30" y="100" width="510" height="700" rx="24" fill="#FBF7F2" stroke="#E8DCCF" stroke-width="2"/>
+  <circle cx="67" cy="141" r="19" fill="#D97706"/>
+  <text x="67" y="142" class="sb center white">1</text>
+  <text x="100" y="142" class="h" dominant-baseline="middle">Token confidence</text>
+
+  <!-- illustrative scene -->
+  <rect x="55" y="188" width="250" height="215" rx="18" fill="#FFFFFF" stroke="#D8E0E7" stroke-width="2"/>
+  <text x="180" y="211" class="s center muted">Illustrative example</text>
+  <g clip-path="url(#sceneClip)">
+    <rect x="64" y="220" width="232" height="160" fill="#EAF2F8"/>
+    <rect x="64" y="326" width="232" height="54" fill="#F0DFC4"/>
+    <!-- plate -->
+    <ellipse cx="176" cy="342" rx="79" ry="20" fill="#FFFFFF" stroke="#9FB1BF" stroke-width="3"/>
+    <ellipse cx="176" cy="342" rx="53" ry="11" fill="#F2F5F7" stroke="#CCD6DE" stroke-width="2"/>
+    <!-- cup -->
+    <path d="M111 277 L148 277 L144 332 L115 332 Z" fill="#8FB8D4" stroke="#2C5F8A" stroke-width="3"/>
+    <path d="M147 287 C171 285 170 315 147 314" fill="none" stroke="#2C5F8A" stroke-width="4"/>
+    <!-- bottle -->
+    <path d="M217 242 L237 242 L237 267 C249 277 253 292 251 325 L203 325 C201 292 205 277 217 267 Z" fill="#9ED5C9" stroke="#178F7B" stroke-width="3"/>
+    <rect x="216" y="232" width="22" height="13" rx="3" fill="#178F7B"/>
+    <!-- absent fork cue -->
+    <circle cx="270" cy="250" r="18" fill="#FFFFFF" stroke="#D97706" stroke-width="3" stroke-dasharray="6 5"/>
+    <text x="270" y="251" class="sb center" fill="#D97706">?</text>
+  </g>
+
+  <!-- contextual prior -->
+  <rect x="325" y="188" width="190" height="215" rx="18" fill="#FFFFFF" stroke="#D8E0E7" stroke-width="2"/>
+  <text x="420" y="220" class="sb center">Generation prefix</text>
+  <text x="420" y="260" class="s center">“A meal with</text>
+  <text x="420" y="289" class="s center">a plate and a …”</text>
+  <path d="M350 328 H490" class="line orange-stroke" marker-end="url(#arrowOrange)"/>
+  <text x="420" y="355" class="sb center" fill="#D97706">Context prior</text>
+
+  <!-- token-score card -->
+  <rect x="55" y="430" width="460" height="180" rx="18" fill="#FFFFFF" stroke="#D8E0E7" stroke-width="2"/>
+  <text x="285" y="459" class="sb center">Next-token scores</text>
+  <text x="96" y="500" class="s">cup</text>
+  <rect x="160" y="487" width="270" height="18" rx="9" fill="#E3EBF2"/>
+  <rect x="160" y="487" width="208" height="18" rx="9" fill="#5E89AC"/>
+  <text x="96" y="539" class="s">bottle</text>
+  <rect x="160" y="526" width="270" height="18" rx="9" fill="#E3EBF2"/>
+  <rect x="160" y="526" width="226" height="18" rx="9" fill="#178F7B"/>
+  <text x="96" y="578" class="sb" fill="#D97706">fork</text>
+  <rect x="160" y="565" width="270" height="18" rx="9" fill="#F5E5D3"/>
+  <rect x="160" y="565" width="244" height="18" rx="9" fill="#D97706"/>
+  <circle cx="467" cy="574" r="15" fill="#FFF3E4" stroke="#D97706" stroke-width="2"/>
+  <text x="467" y="575" class="sb center" fill="#D97706">!</text>
+
+  <path d="M285 610 V636" class="line orange-stroke" marker-end="url(#arrowOrange)"/>
+  <rect x="65" y="650" width="440" height="95" rx="18" fill="#FFF3E4" stroke="#D97706" stroke-width="3"/>
+  <text x="285" y="680" class="sb center" fill="#D97706">Hallucinated object</text>
+  <text x="285" y="716" class="s center">“... a cup, bottle, and <tspan fill="#D97706" font-weight="700">fork</tspan>.”</text>
+  <text x="285" y="773" class="sb center" fill="#D97706">High logit ≠ visual support</text>
+
+  <!-- Region 2: SCCD core -->
+  <rect x="560" y="100" width="800" height="700" rx="24" fill="#F0F8F7" stroke="#84C5BA" stroke-width="3"/>
+  <circle cx="597" cy="141" r="19" fill="#178F7B"/>
+  <text x="597" y="142" class="sb center white">2</text>
+  <text x="630" y="142" class="h" dominant-baseline="middle">Verify the semantic claim</text>
+  <rect x="1164" y="119" width="165" height="44" rx="22" fill="#DDF2EE" stroke="#178F7B" stroke-width="2"/>
+  <text x="1247" y="142" class="sb center" fill="#178F7B">Training-free</text>
+
+  <!-- token to claim -->
+  <rect x="645" y="186" width="205" height="70" rx="35" fill="#FFF3E4" stroke="#D97706" stroke-width="3"/>
+  <text x="748" y="222" class="h center" fill="#D97706">“fork”</text>
+  <path d="M860 221 H985" class="line teal-stroke" marker-end="url(#arrowTeal)"/>
+  <rect x="1000" y="186" width="270" height="70" rx="18" fill="#FFFFFF" stroke="#178F7B" stroke-width="3"/>
+  <text x="1135" y="222" class="h center" fill="#178F7B">exists(fork)</text>
+
+  <!-- shared verifier -->
+  <rect x="592" y="297" width="736" height="215" rx="20" fill="#FFFFFF" stroke="#A9C7D8" stroke-width="2" stroke-dasharray="9 7"/>
+  <rect x="820" y="280" width="280" height="42" rx="21" fill="#E8F1F7"/>
+  <text x="960" y="301" class="sb center">Shared frozen MLLM</text>
+  <path d="M1135 256 V274 H960 V280" class="line teal-stroke" marker-end="url(#arrowTeal)"/>
+
+  <!-- real card -->
+  <rect x="614" y="338" width="205" height="145" rx="16" fill="#F6FAFD" stroke="#5E89AC" stroke-width="2"/>
+  <rect x="637" y="359" width="58" height="45" rx="6" fill="#DDECF5" stroke="#2C5F8A" stroke-width="2"/>
+  <circle cx="681" cy="370" r="6" fill="#D9A441"/>
+  <path d="M643 397 L657 384 L667 393 L679 380 L690 397 Z" fill="#5E89AC"/>
+  <text x="716" y="381" class="sb">Real image</text>
+  <text x="716" y="410" class="s muted">Yes / No</text>
+  <text x="716" y="450" class="h" fill="#2C5F8A">m<tspan baseline-shift="sub">r</tspan></text>
+
+  <!-- blurred card -->
+  <rect x="858" y="338" width="205" height="145" rx="16" fill="#F6FAFD" stroke="#5E89AC" stroke-width="2"/>
+  <circle cx="893" cy="381" r="20" fill="#89AFC8" opacity="0.32"/>
+  <circle cx="907" cy="381" r="20" fill="#89AFC8" opacity="0.32"/>
+  <circle cx="900" cy="369" r="20" fill="#89AFC8" opacity="0.32"/>
+  <text x="951" y="381" class="sb center">Blurred view</text>
+  <text x="951" y="410" class="s center muted">Yes / No</text>
+  <text x="951" y="450" class="h center" fill="#2C5F8A">m<tspan baseline-shift="sub">b</tspan></text>
+
+  <!-- text-only card -->
+  <rect x="1102" y="338" width="205" height="145" rx="16" fill="#F6FAFD" stroke="#5E89AC" stroke-width="2"/>
+  <rect x="1124" y="359" width="55" height="47" rx="5" fill="#FFFFFF" stroke="#2C5F8A" stroke-width="2"/>
+  <path d="M1135 372 H1168 M1135 383 H1168 M1135 394 H1159" stroke="#5E89AC" stroke-width="3" stroke-linecap="round"/>
+  <text x="1222" y="381" class="sb center">Text-only</text>
+  <text x="1222" y="410" class="s center muted">Yes / No</text>
+  <text x="1222" y="450" class="h center" fill="#2C5F8A">m<tspan baseline-shift="sub">t</tspan></text>
+
+  <!-- views to evidence -->
+  <path d="M716 483 V535 H960" class="line blue-stroke"/>
+  <path d="M960 483 V535" class="line blue-stroke"/>
+  <path d="M1204 483 V535 H960" class="line blue-stroke"/>
+  <path d="M960 535 V560" class="line teal-stroke" marker-end="url(#arrowTeal)"/>
+
+  <rect x="685" y="575" width="550" height="145" rx="22" fill="#DFF3EF" stroke="#178F7B" stroke-width="4"/>
+  <text x="960" y="608" class="sb center" fill="#178F7B">CONTRASTIVE SEMANTIC EVIDENCE</text>
+  <text x="960" y="652" class="h center">E(c) = (m<tspan baseline-shift="sub">r</tspan> − m<tspan baseline-shift="sub">b</tspan>) − 0.5 [m<tspan baseline-shift="sub">t</tspan>]<tspan baseline-shift="super">+</tspan></text>
+  <text x="823" y="692" class="s center muted">visual necessity proxy</text>
+  <text x="1102" y="692" class="s center muted">text-only prior estimate</text>
+  <path d="M960 720 V765" class="line teal-stroke"/>
+  <text x="960" y="774" class="sb center" fill="#178F7B">Claim-level support</text>
+
+  <!-- Region 3: selective correction -->
+  <rect x="1380" y="100" width="390" height="700" rx="24" fill="#F6F8FB" stroke="#C9D5DF" stroke-width="2"/>
+  <circle cx="1417" cy="141" r="19" fill="#2C5F8A"/>
+  <text x="1417" y="142" class="sb center white">3</text>
+  <text x="1450" y="142" class="h" dominant-baseline="middle">Selective action</text>
+  <rect x="1420" y="190" width="310" height="52" rx="26" fill="#E8F1F7" stroke="#5E89AC" stroke-width="2"/>
+  <text x="1575" y="217" class="sb center">Object existence only</text>
+
+  <!-- cross-region evidence arrow -->
+  <path d="M1235 647 H1350 V552 H1431" class="line teal-stroke" marker-end="url(#arrowTeal)"/>
+  <polygon points="1575,485 1715,552 1575,619 1435,552" fill="#FFFFFF" stroke="#178F7B" stroke-width="4"/>
+  <text x="1575" y="540" class="h center">Asymmetric</text>
+  <text x="1575" y="573" class="h center">Gate</text>
+
+  <path d="M1510 609 V652 H1459" class="line orange-stroke" marker-end="url(#arrowOrange)"/>
+  <path d="M1575 619 V652" class="line blue-stroke" marker-end="url(#arrowBlue)"/>
+  <path d="M1640 609 V652 H1691" class="line teal-stroke" marker-end="url(#arrowTeal)"/>
+  <rect x="1400" y="665" width="120" height="52" rx="26" fill="#FFF3E4" stroke="#D97706" stroke-width="2"/>
+  <text x="1460" y="692" class="sb center" fill="#D97706">SUPPRESS</text>
+  <rect x="1528" y="665" width="96" height="52" rx="26" fill="#E8F1F7" stroke="#2C5F8A" stroke-width="2"/>
+  <text x="1576" y="692" class="sb center">KEEP</text>
+  <rect x="1632" y="665" width="116" height="52" rx="26" fill="#DFF3EF" stroke="#178F7B" stroke-width="2"/>
+  <text x="1690" y="692" class="sb center" fill="#178F7B">PROMOTE</text>
+
+  <rect x="1410" y="738" width="330" height="48" rx="14" fill="#FFFFFF" stroke="#178F7B" stroke-width="3"/>
+  <text x="1575" y="763" class="s center">“A plate with a cup and bottle.”</text>
+  <text x="1575" y="448" class="sb center" fill="#178F7B">Evidence-guided correction</text>
+
+  <!-- bottom thesis strip -->
+  <rect x="30" y="820" width="1740" height="58" rx="18" fill="#17324D"/>
+  <text x="395" y="850" class="h center white">Verify the claim before changing the token.</text>
+  <line x1="760" y1="834" x2="760" y2="866" stroke="#6E879C" stroke-width="2"/>
+  <text x="1015" y="850" class="sb center white">Greedy → SCCD-v3 · CHAIRs ↓ 23.9 → 18.6</text>
+  <line x1="1260" y1="834" x2="1260" y2="866" stroke="#6E879C" stroke-width="2"/>
+  <text x="1515" y="850" class="sb center white">POPE F1 ↑ 83.8 → 85.2</text>
+</svg>

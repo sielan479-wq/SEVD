@@ -1,0 +1,44 @@
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.coverage
+.venv/
+venv/
+
+# Runtime artifacts and local assets.
+outputs/
+models/
+checkpoints/
+*.log
+*.pkl
+
+# Editor and system files.
+.idea/
+.vscode/
+.DS_Store
+data/raw/
+*.pt
+*.pth
+*.bin
+*.safetensors
+
+# Locally installed third-party scorers are intentionally not redistributed.
+evaluation/scorers/chair.py
+evaluation/scorers/mme_calculation.py
+
+# Generated locally from the user's authorized MME benchmark copy.
+data/manifests/mme/all.jsonl
+
+# Local secrets and credentials.
+.env
+.env.*
+!.env.example
+
+# Additional model weights.
+*.ckpt
+*.gguf
+
+# Temporary patch files.
+*.orig
+*.rej

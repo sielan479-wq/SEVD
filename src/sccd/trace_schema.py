@@ -1,0 +1,37 @@
+"""Trace schema constants retained by SCCD for source compatibility."""
+
+TRACE_SCHEMA_VERSION = "pre_attribute_v1_object_risk_gate_trace_v1"
+
+CANDIDATE_TRACE_FIELDS = (
+    "sample_id",
+    "image_id",
+    "step",
+    "candidate_rank",
+    "candidate_token_id",
+    "candidate_text",
+    "canonical_object",
+    "original_logit",
+    "adjusted_logit",
+    "top1_logit",
+    "logit_gap_from_top",
+    "probe_question",
+    "logp_yes_real",
+    "logp_no_real",
+    "logp_yes_blur",
+    "logp_no_blur",
+    "logp_yes_black",
+    "logp_no_black",
+    "margin_real",
+    "margin_blur",
+    "margin_black",
+    "necessity",
+    "prior_risk",
+    "fs",
+    "evidence_score",
+    "action",
+    "delta",
+    "selected_token_before",
+    "selected_token_after",
+    "output_changed",
+    "cache_hit",
+)

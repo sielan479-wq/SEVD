@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="2100" height="1100" viewBox="0 0 2100 1100" role="img" aria-labelledby="title desc">
+  <title id="title">Architecture of Semantic Claim Contrastive Decoding</title>
+  <desc id="desc">SCCD architecture with direct binary and free-form candidate routes, object-existence claim construction, real blurred and text-only semantic verification, contrastive evidence, asymmetric gating, and binary or sparse-logit output paths.</desc>
+  <defs>
+    <style>
+      .h { font: 700 28px 'DejaVu Sans', Arial, sans-serif; fill: #17324D; }
+      .s { font: 400 18px 'DejaVu Sans', Arial, sans-serif; fill: #31475B; }
+      .sb { font: 700 18px 'DejaVu Sans', Arial, sans-serif; fill: #17324D; }
+      .center { text-anchor: middle; dominant-baseline: middle; }
+      .muted { fill: #66788A; }
+      .white { fill: #FFFFFF; }
+      .line { fill: none; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+    </style>
+    <marker id="aBlue" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L10,5 L0,10 z" fill="#2C5F8A"/></marker>
+    <marker id="aTeal" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L10,5 L0,10 z" fill="#178F7B"/></marker>
+    <marker id="aOrange" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L10,5 L0,10 z" fill="#D97706"/></marker>
+    <marker id="aGray" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L10,5 L0,10 z" fill="#7C8D9B"/></marker>
+  </defs>
+
+  <rect width="2100" height="1100" fill="#FFFFFF"/>
+  <text x="1050" y="40" class="h center">Semantic Claim Contrastive Decoding (SCCD)</text>
+  <text x="1050" y="74" class="s center muted">Claim construction · contrastive verification · asymmetric selective decoding</text>
+
+  <!-- Four functional regions -->
+  <rect x="30" y="105" width="500" height="905" rx="24" fill="#F6F8FB" stroke="#CDD8E1" stroke-width="2"/>
+  <rect x="550" y="105" width="610" height="905" rx="24" fill="#EFF6FA" stroke="#A9C7D8" stroke-width="2"/>
+  <rect x="1180" y="105" width="510" height="905" rx="24" fill="#EEF8F6" stroke="#60B4A6" stroke-width="3"/>
+  <rect x="1710" y="105" width="360" height="905" rx="24" fill="#F8F7F3" stroke="#D8D5CC" stroke-width="2"/>
+
+  <circle cx="68" cy="146" r="20" fill="#2C5F8A"/><text x="68" y="147" class="sb center white">1</text>
+  <text x="104" y="147" class="h" dominant-baseline="middle">Semantic candidate</text>
+  <circle cx="588" cy="146" r="20" fill="#178F7B"/><text x="588" y="147" class="sb center white">2</text>
+  <text x="624" y="147" class="h" dominant-baseline="middle">Three-view verification</text>
+  <circle cx="1218" cy="146" r="20" fill="#178F7B"/><text x="1218" y="147" class="sb center white">3</text>
+  <text x="1254" y="147" class="h" dominant-baseline="middle">Selective gate</text>
+  <circle cx="1748" cy="146" r="20" fill="#D97706"/><text x="1748" y="147" class="sb center white">4</text>
+  <text x="1784" y="147" class="h" dominant-baseline="middle">Output</text>
+
+  <!-- Candidate: binary route -->
+  <rect x="60" y="205" width="195" height="100" rx="16" fill="#FFFFFF" stroke="#5E89AC" stroke-width="2"/>
+  <text x="157" y="244" class="sb center">Explicit Query</text>
+  <text x="157" y="277" class="s center muted">POPE · MME</text>
+  <path d="M255 255 H291" class="line" stroke="#2C5F8A" marker-end="url(#aBlue)"/>
+  <rect x="305" y="205" width="195" height="100" rx="16" fill="#FFFFFF" stroke="#5E89AC" stroke-width="2"/>
+  <text x="402" y="244" class="sb center">Parse Object</text>
+  <text x="402" y="277" class="s center muted">direct claim route</text>
+
+  <!-- Candidate: free-form route -->
+  <rect x="60" y="565" width="195" height="105" rx="16" fill="#FFFFFF" stroke="#5E89AC" stroke-width="2"/>
+  <rect x="82" y="590" width="43" height="54" rx="5" fill="#E8F1F7" stroke="#2C5F8A" stroke-width="2"/>
+  <rect x="91" y="581" width="43" height="54" rx="5" fill="#FFFFFF" stroke="#2C5F8A" stroke-width="2"/>
+  <text x="181" y="603" class="sb center">Next-token</text>
+  <text x="181" y="634" class="s center muted">logits</text>
+  <path d="M255 617 H291" class="line" stroke="#2C5F8A" marker-end="url(#aBlue)"/>
+  <rect x="305" y="535" width="195" height="205" rx="18" fill="#FFFFFF" stroke="#5E89AC" stroke-width="2"/>
+  <text x="402" y="570" class="sb center">Candidate Screening</text>
+  <line x1="330" y1="593" x2="475" y2="593" stroke="#D5E0E8" stroke-width="2"/>
+  <text x="402" y="623" class="s center">Top-50 scan</text>
+  <text x="402" y="657" class="s center">logit gap ≤ 3.0</text>
+  <text x="402" y="691" class="s center">object mapping</text>
+  <text x="402" y="722" class="s center muted">not sampling top-k</text>
+
+  <!-- Routes merge into semantic claim -->
+  <path d="M402 305 V380 H280 V421" class="line" stroke="#2C5F8A" marker-end="url(#aBlue)"/>
+  <path d="M402 535 V505 H430 V471 H429" class="line" stroke="#2C5F8A" marker-end="url(#aBlue)"/>
+  <rect x="145" y="425" width="270" height="92" rx="20" fill="#DFF3EF" stroke="#178F7B" stroke-width="4"/>
+  <text x="280" y="454" class="sb center" fill="#178F7B">SEMANTIC CLAIM</text>
+  <text x="280" y="490" class="h center">exists(o)</text>
+  <rect x="92" y="790" width="376" height="128" rx="18" fill="#FFFFFF" stroke="#C8D4DE" stroke-width="2"/>
+  <text x="280" y="823" class="sb center">Selective verification</text>
+  <text x="280" y="856" class="s center">Claim cache · ≤ 8 / generation</text>
+  <text x="280" y="889" class="s center muted">non-object candidates unchanged</text>
+  <rect x="129" y="942" width="302" height="45" rx="22" fill="#E8F1F7"/>
+  <text x="280" y="965" class="sb center">Object existence only</text>
+
+  <!-- claim exits to verifier along clean gutter -->
+  <path d="M415 471 H540 V229 H580" class="line" stroke="#178F7B" marker-end="url(#aTeal)"/>
+
+  <!-- Yes/No probe -->
+  <rect x="590" y="190" width="530" height="78" rx="18" fill="#FFFFFF" stroke="#178F7B" stroke-width="3"/>
+  <text x="855" y="218" class="sb center">Unified Yes / No Probe</text>
+  <text x="855" y="247" class="s center muted">“Is there a/an o in the image?”</text>
+  <path d="M855 268 V304" class="line" stroke="#178F7B"/>
+  <path d="M670 304 H1040" class="line" stroke="#178F7B"/>
+  <path d="M670 304 V331" class="line" stroke="#178F7B" marker-end="url(#aTeal)"/>
+  <path d="M855 304 V331" class="line" stroke="#178F7B" marker-end="url(#aTeal)"/>
+  <path d="M1040 304 V331" class="line" stroke="#178F7B" marker-end="url(#aTeal)"/>
+
+  <!-- three shared-model conditions -->
+  <rect x="590" y="345" width="160" height="210" rx="18" fill="#FFFFFF" stroke="#5E89AC" stroke-width="2"/>
+  <rect x="613" y="374" width="114" height="73" rx="8" fill="#DDECF5" stroke="#2C5F8A" stroke-width="2"/>
+  <circle cx="703" cy="392" r="8" fill="#D9A441"/>
+  <path d="M623 436 L646 413 L661 426 L684 402 L716 436 Z" fill="#5E89AC"/>
+  <text x="670" y="478" class="sb center">Real Image</text>
+  <text x="670" y="519" class="h center" fill="#2C5F8A">m<tspan baseline-shift="sub">r</tspan></text>
+
+  <rect x="775" y="345" width="160" height="210" rx="18" fill="#FFFFFF" stroke="#5E89AC" stroke-width="2"/>
+  <circle cx="837" cy="405" r="31" fill="#89AFC8" opacity="0.28"/>
+  <circle cx="873" cy="405" r="31" fill="#89AFC8" opacity="0.28"/>
+  <circle cx="855" cy="381" r="31" fill="#89AFC8" opacity="0.28"/>
+  <text x="855" y="478" class="sb center">Blur · r = 15</text>
+  <text x="855" y="519" class="h center" fill="#2C5F8A">m<tspan baseline-shift="sub">b</tspan></text>
+
+  <rect x="960" y="345" width="160" height="210" rx="18" fill="#FFFFFF" stroke="#5E89AC" stroke-width="2"/>
+  <rect x="1006" y="374" width="68" height="73" rx="7" fill="#FFFFFF" stroke="#2C5F8A" stroke-width="2"/>
+  <path d="M1019 391 H1061 M1019 407 H1061 M1019 423 H1052" stroke="#5E89AC" stroke-width="4" stroke-linecap="round"/>
+  <text x="1040" y="478" class="sb center">Text Only</text>
+  <text x="1040" y="519" class="h center" fill="#2C5F8A">m<tspan baseline-shift="sub">t</tspan></text>
+
+  <rect x="624" y="580" width="462" height="56" rx="28" fill="#E8F1F7"/>
+  <text x="855" y="609" class="s center">m<tspan baseline-shift="sub">v</tspan> = log P(Yes | v,c) − log P(No | v,c)</text>
+  <path d="M670 555 V660 H855" class="line" stroke="#5E89AC"/>
+  <path d="M855 555 V660" class="line" stroke="#5E89AC"/>
+  <path d="M1040 555 V660 H855" class="line" stroke="#5E89AC"/>
+  <path d="M855 660 V690" class="line" stroke="#178F7B" marker-end="url(#aTeal)"/>
+
+  <rect x="638" y="705" width="434" height="145" rx="22" fill="#DFF3EF" stroke="#178F7B" stroke-width="4"/>
+  <text x="855" y="738" class="sb center" fill="#178F7B">SEMANTIC EVIDENCE</text>
+  <text x="855" y="786" class="h center">E = (m<tspan baseline-shift="sub">r</tspan> − m<tspan baseline-shift="sub">b</tspan>) − 0.5 [m<tspan baseline-shift="sub">t</tspan>]<tspan baseline-shift="super">+</tspan></text>
+  <text x="855" y="825" class="s center muted">visual dependence − text-prior risk</text>
+  <rect x="668" y="902" width="374" height="56" rx="28" fill="#FFFFFF" stroke="#A9C7D8" stroke-width="2"/>
+  <text x="855" y="931" class="sb center">3 verifier passes / new claim</text>
+
+  <!-- Evidence into asymmetric gate -->
+  <path d="M1072 778 H1169 V631 H1285" class="line" stroke="#178F7B" marker-end="url(#aTeal)"/>
+
+  <!-- Gate rules -->
+  <rect x="1218" y="195" width="434" height="245" rx="20" fill="#FFFFFF" stroke="#8CC8BD" stroke-width="2"/>
+  <text x="1435" y="226" class="sb center">FROZEN v3 RULE</text>
+  <line x1="1245" y1="249" x2="1625" y2="249" stroke="#D5E5E1" stroke-width="2"/>
+  <text x="1252" y="280" class="s">m<tspan baseline-shift="sub">r</tspan> &gt; 0, E &lt; −1.0</text>
+  <text x="1607" y="280" class="sb" text-anchor="end" fill="#D97706">Suppress</text>
+  <text x="1252" y="318" class="s">m<tspan baseline-shift="sub">r</tspan> &gt; 0, E ≥ −1.0</text>
+  <text x="1607" y="318" class="sb" text-anchor="end">Keep</text>
+  <text x="1252" y="356" class="s">m<tspan baseline-shift="sub">r</tspan> ≤ 0, E &gt; 0.45</text>
+  <text x="1252" y="383" class="s">m<tspan baseline-shift="sub">r</tspan> &gt; −0.55</text>
+  <text x="1607" y="370" class="sb" text-anchor="end" fill="#178F7B">Promote</text>
+  <text x="1252" y="419" class="s muted">otherwise</text>
+  <text x="1607" y="419" class="sb" text-anchor="end" fill="#D97706">Suppress</text>
+
+  <polygon points="1435,535 1578,630 1435,725 1292,630" fill="#FFFFFF" stroke="#178F7B" stroke-width="4"/>
+  <text x="1435" y="612" class="h center">Asymmetric</text>
+  <text x="1435" y="650" class="h center">Gate</text>
+  <text x="1435" y="683" class="s center muted">A(c)</text>
+
+  <!-- gate actions -->
+  <path d="M1375 709 V765 H1266" class="line" stroke="#D97706" marker-end="url(#aOrange)"/>
+  <path d="M1435 725 V765" class="line" stroke="#2C5F8A" marker-end="url(#aBlue)"/>
+  <path d="M1495 709 V765 H1600" class="line" stroke="#178F7B" marker-end="url(#aTeal)"/>
+  <rect x="1210" y="780" width="126" height="58" rx="29" fill="#FFF3E4" stroke="#D97706" stroke-width="2"/>
+  <text x="1273" y="810" class="sb center" fill="#D97706">SUPPRESS</text>
+  <rect x="1378" y="780" width="112" height="58" rx="29" fill="#E8F1F7" stroke="#2C5F8A" stroke-width="2"/>
+  <text x="1434" y="810" class="sb center">KEEP</text>
+  <rect x="1532" y="780" width="136" height="58" rx="29" fill="#DFF3EF" stroke="#178F7B" stroke-width="2"/>
+  <text x="1600" y="810" class="sb center" fill="#178F7B">PROMOTE</text>
+  <rect x="1250" y="897" width="370" height="61" rx="18" fill="#17324D"/>
+  <text x="1435" y="928" class="sb center white">Selective · asymmetric · bounded</text>
+
+  <!-- actions join a clean output router -->
+  <path d="M1273 838 V865 H1688" class="line" stroke="#D97706"/>
+  <path d="M1434 838 V865" class="line" stroke="#2C5F8A"/>
+  <path d="M1600 838 V865 H1688" class="line" stroke="#178F7B"/>
+  <path d="M1688 865 H1699 V325 H1735" class="line" stroke="#7C8D9B" marker-end="url(#aGray)"/>
+  <path d="M1699 665 H1735" class="line" stroke="#7C8D9B" marker-end="url(#aGray)"/>
+
+  <!-- binary output -->
+  <rect x="1740" y="210" width="300" height="235" rx="20" fill="#FFFFFF" stroke="#5E89AC" stroke-width="2"/>
+  <text x="1890" y="246" class="sb center">BINARY REASONING</text>
+  <line x1="1768" y1="269" x2="2012" y2="269" stroke="#D8E2E9" stroke-width="2"/>
+  <text x="1890" y="306" class="s center">Keep / Promote → Yes</text>
+  <text x="1890" y="342" class="s center">Suppress → No</text>
+  <rect x="1797" y="372" width="186" height="50" rx="25" fill="#E8F1F7"/>
+  <text x="1890" y="398" class="h center">YES / NO</text>
+
+  <!-- free-form output -->
+  <rect x="1740" y="525" width="300" height="345" rx="20" fill="#FFFFFF" stroke="#178F7B" stroke-width="3"/>
+  <text x="1890" y="562" class="sb center">FREE-FORM GENERATION</text>
+  <line x1="1768" y1="585" x2="2012" y2="585" stroke="#D8E6E2" stroke-width="2"/>
+  <text x="1890" y="621" class="sb center" fill="#178F7B">Sparse Logit Edit</text>
+  <text x="1890" y="660" class="s center">Suppress: Δz = −10000</text>
+  <text x="1890" y="695" class="s center">Keep: Δz = 0</text>
+  <text x="1890" y="730" class="s center">Promote: Δz = +0.5</text>
+  <path d="M1890 749 V777" class="line" stroke="#178F7B" marker-end="url(#aTeal)"/>
+  <rect x="1795" y="790" width="190" height="54" rx="27" fill="#DFF3EF"/>
+  <text x="1890" y="818" class="sb center">ARGMAX → TOKEN</text>
+  <text x="1890" y="903" class="s center muted">verified candidates only</text>
+  <text x="1890" y="937" class="s center muted">pre-softmax edits</text>
+
+  <!-- shared implementation boundary -->
+  <rect x="1735" y="965" width="310" height="43" rx="21" fill="#EDEBE5"/>
+  <text x="1890" y="987" class="sb center">Inference-time · no training</text>
+</svg>

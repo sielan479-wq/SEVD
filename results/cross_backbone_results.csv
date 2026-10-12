@@ -1,0 +1,5 @@
+backbone,method,display_name,pope_accuracy,pope_precision,pope_recall,pope_f1,pope_yes_ratio,pope_num_samples,pope_parser_failures,pope_run_id,pope_status,pope_scorer_ok,parameter_version,validation_scope
+LLaVA-1.5-7B,greedy,Greedy,0.854,0.9434527553048211,0.754,0.8379456626378375,0.4,9000,0,llava_protocol_v4_pope_20260902_r1,completed,True,protocol_v4,Within-backbone Greedy reference under canonical binary protocol
+LLaVA-1.5-7B,sevd,SEVD,0.8604444444444445,0.9136067051170214,0.798,0.8515014173265442,0.43755555555555553,9000,0,sccd_gate_tuning_20260916_v3_recall_pope_replay,completed,True,tuned_v3,Within-backbone final SEVD; exact full-set gate replay
+Qwen2.5-VL-7B-Instruct,greedy,Greedy,0.8764444444444445,0.9659152168526012,0.7806666666666665,0.8634061208859749,0.40422222222222226,9000,0,qwen_protocol_v4_pope_20260902_r1,completed,True,protocol_v4,Cross-backbone Greedy reference under canonical binary protocol
+Qwen2.5-VL-7B-Instruct,sevd,SEVD,0.8995555555555557,0.9375183553071741,0.8573333333333334,0.895371197192871,0.45777777777777784,9000,0,qwen25vl_sccd_v3_pope_20260917_r1,completed,True,tuned_v3,Positive end-to-end tuned-v3 cross-backbone evidence on POPE
